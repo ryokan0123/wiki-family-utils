@@ -60,3 +60,6 @@ done
 
 ## License
 Wiki-Family-Utils is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+## Acknowledgement
+This project is kind of a child 👦 of [Wikipedia-Utils](https://github.com/singletongue/wikipedia-utils), serving similar use cases but with customized processing. 
