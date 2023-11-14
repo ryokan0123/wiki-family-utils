@@ -4,10 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["Ryou0634 <ryou0634@gmail.com>"]
 readme = "README.md"
-packages = [{include = "plain_wiki"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 jsonargparse = "^4.27.0"
 tqdm = "^4.66.1"
 requests = "^2.31.0"
