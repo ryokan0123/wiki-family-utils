@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "plain-wiki"
+version = "0.1.0"
+description = ""
+authors = ["Ryou0634 <ryou0634@gmail.com>"]
+readme = "README.md"
+packages = [{include = "plain_wiki"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+jsonargparse = "^4.27.0"
+tqdm = "^4.66.1"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+isort = "^5.12.0"
+flake8 = "^6.1.0"
+taskipy = "^1.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+format = "black *.py; isort *.py; flake8 *.py"
