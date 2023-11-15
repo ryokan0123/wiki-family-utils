@@ -119,7 +119,7 @@ def process_contents_to_plain_text(content_list: list[ExtractedContent]) -> str:
     for content in content_list:
         if content.section_title != current_section_title:
             current_section_title = content.section_title
-            plain_text += "\n## " + current_section_title + "\n"
+            plain_text += "\n" + current_section_title + "\n"
 
         if content.tag_name == "li":
             plain_text += "- "
@@ -176,7 +176,7 @@ def extract_data(
                 tags_to_remove=tags_to_remove,
                 inner_tags_to_remove=inner_tags_to_remove,
             ):
-                if content.tag_name in sections_to_ignore:
+                if content.section_title in sections_to_ignore:
                     continue
                 content_list.append(content)
 
