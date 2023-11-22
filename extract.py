@@ -127,18 +127,16 @@ def process_contents_to_plain_text(content_list: list[ExtractedContent]) -> str:
     return plain_text.strip()
 
 
-def process_contents_to_passages(
-    content_list: list[ExtractedContent], max_num_characters: int
+def process_contents_to_paragraphs(
+    content_list: list[ExtractedContent],
 ) -> Iterator[dict[str, str]]:
     current_passage = ""
     current_section_title = LEAD_SECTION
     for content in content_list:
+        # if the section is changed and the passage is not empty
         if (
-            (
-                len(current_passage) + len(content.text) > max_num_characters
-            )  # the passage is full
-            or content.section_title != current_section_title  # the section is changed
-        ) and current_passage != "":  # the passage is not empty
+            content.section_title != current_section_title and current_passage != ""
+        ):  # the passage is not empty
             yield {"passage": current_passage, "section_title": current_section_title}
             current_passage = ""
         if content.section_title != current_section_title:
@@ -150,9 +148,8 @@ def process_contents_to_passages(
 
 def extract_data(
     data_path: str,
-    output_type: Literal["plain_text", "passages"],
+    output_type: Literal["plain_text", "paragraphs"],
     output_path: str | None,
-    passage_num_characters: int = 400,
     sections_to_ignore: list[str] | None = None,
     tags_to_extract: list[str] | None = None,
     tags_to_remove: list[str] | None = None,
@@ -188,10 +185,8 @@ def extract_data(
                     "url": json_data["url"],
                 }
                 f.write(json.dumps(item_dict, ensure_ascii=False) + "\n")
-            elif output_type == "passages":
-                for passage_dict in process_contents_to_passages(
-                    content_list, passage_num_characters
-                ):
+            elif output_type == "paragraphs":
+                for passage_dict in process_contents_to_paragraphs(content_list):
                     passage_dict.update({"title": page_title, "url": json_data["url"]})
                     f.write(json.dumps(passage_dict, ensure_ascii=False) + "\n")
 
