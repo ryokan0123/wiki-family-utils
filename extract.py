@@ -36,7 +36,7 @@ LEAD_SECTION = "__LEAD__"
 DEFAULT_TAGS_TO_REMOVE = ["table"]
 DEFAULT_TAGS_TO_EXTRACT = ["p", "li", "h3", "h4"]
 DEFAULT_INNER_TAGS_TO_REMOVE = [
-    {"name": "sup"},
+    {"name": "sup", "attrs": {"class": "reference"}},
     {"name": "span", "attrs": {"class": "mw-editsection"}},
 ]
 DEFAULT_SECTIONS_TO_IGNORE = ["脚注", "出典", "参考文献", "関連項目", "外部リンク"]
