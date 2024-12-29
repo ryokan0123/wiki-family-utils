@@ -68,6 +68,8 @@ def contents_to_markdown(
             text += f"\n{content.text}\n\n"
         elif content.tag_name in {"ul", "ol"}:
             text += content.text + "\n"
+        elif content.tag_name in {"img"}:
+            text += content.text
         else:
             raise ValueError(f"Invalid tag name: {content.tag_name}")
 
@@ -76,5 +78,5 @@ def contents_to_markdown(
     text = re.sub(r"\n{3,}", "\n\n", text)
     # remove reference tags
     if remove_refs:
-        text = re.sub(r"\[\^\d+\]", "", text)
+        text = re.sub(r"\[\^.+?\]", "", text)
     return text
